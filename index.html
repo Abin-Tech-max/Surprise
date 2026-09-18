@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>U... 💞 K.... — Love Story</title>
+<meta name="theme-color" content="#0a0509">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   1. VARIABLES
+   ============================================================ */
+:root{
+  --bg-image: url('https://i.postimg.cc/SN1rKVys/proved-2.jpg');
+  --cover-image: url('https://i.postimg.cc/4yN6fHqw/required-size-background-image.jpg');
+
+  --void: #0a0509;
+  --wine-deep: #1c0812;
+  --wine: #3d0f24;
+  --burgundy: #6b1533;
+  --rose: #e888a8;
+  --rose-soft: #f2b8ce;
+  --gold: #d8b26a;
+  --gold-bright: #f0d29a;
+  --ivory: #f7efe4;
+  --cream: #fbf6ee;
+  --ink: #2b1c22;
+  --ink-soft: #5a4550;
+
+  --serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --serif-body: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+
+  --ease-book: cubic-bezier(.22,.61,.14,1);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+}
+
+/* ============================================================
+   2. RESET
+   ============================================================ */
+*,*:before,*:after{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ width:100%; height:100%; }
+body{
+  font-family:var(--sans);
+  color:var(--ivory);
+  background:var(--void);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+button{ font-family:inherit; }
+button:focus-visible, a:focus-visible{
+  outline:2px solid var(--gold-bright);
+  outline-offset:3px;
+}
+
+/* ============================================================
+   3. BACKGROUND / ENVIRONMENT
+   ============================================================ */
+.scene{
+  position:fixed; inset:0;
+  display:grid; place-items:center;
+  perspective:2200px;
+  background:#0a0509;
+  isolation:isolate;
+}
+.scene:before{
+  content:"";
+  position:fixed; inset:0; z-index:0;
+  background-image:var(--bg-image);
+  background-position:center; background-size:cover;
+  filter:saturate(.85) blur(1.5px);
+  opacity:.28;
+  transform:scale(1.04);
+  will-change:transform,opacity;
+}
+.scene:after{
+  content:"";
+  position:fixed; inset:0; z-index:1;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(232,136,168,.14), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(107,21,51,.35), transparent 55%),
+    linear-gradient(160deg, #0c0509 0%, #170810 45%, #200a15 100%);
+}
+.grain{
+  position:fixed; inset:0; z-index:2; pointer-events:none; opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.vignette{
+  position:fixed; inset:0; z-index:4; pointer-events:none;
+  box-shadow:inset 0 0 22vw rgba(0,0,0,.65);
+}
+
+/* Ambient particles */
+.ambient{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
+.mote{
+  position:absolute; bottom:-6vh; border-radius:50%;
+  background:radial-gradient(circle, rgba(240,210,154,.85), rgba(240,210,154,0) 70%);
+  animation:drift var(--d) linear var(--delay) infinite;
+  opacity:0;
+}
+.bg-heart{
+  position:absolute; bottom:-8vh; color:rgba(232,136,168,.28);
+  font-size:var(--s); animation:rise var(--d) linear var(--delay) infinite;
+}
+@keyframes drift{
+  0%{ transform:translate3d(0,0,0); opacity:0; }
+  12%{ opacity:.9; }
+  88%{ opacity:.5; }
+  100%{ transform:translate3d(var(--drift), -108vh, 0); opacity:0; }
+}
+@keyframes rise{
+  0%{ transform:translate3d(0,0,0) rotate(0) scale(.55); opacity:0; }
+  14%{ opacity:.75; }
+  100%{ transform:translate3d(var(--drift), -112vh, 0) rotate(28deg) scale(1.15); opacity:0; }
+}
+
+/* ============================================================
+   4. BOOK SCENE
+   ============================================================ */
+.book-stage{
+  width:min(880px, 92vw);
+  height:min(560px, 74vh);
+  min-height:420px;
+  position:relative;
+  transform-style:preserve-3d;
+  z-index:5;
+  opacity:0;
+  animation:bookArrive 1.7s var(--ease-book) .15s forwards;
+}
+@keyframes bookArrive{
+  0%{
+    opacity:0;
+    transform:translate3d(42vw,-38vh,520px) rotateY(-38deg) rotateX(16deg) scale(.1);
+  }
+  62%{ opacity:1; }
+  100%{
+    opacity:1;
+    transform:translate3d(0,0,0) rotateY(0) rotateX(0) scale(1);
+  }
+}
+
+.book{
+  position:relative; width:100%; height:100%;
+  transform-style:preserve-3d;
+}
+
+/* Book base shadow — gives it mass */
+.book-shadow{
+  position:absolute;
+  left:8%; right:8%; bottom:-26px;
+  height:38px;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 72%);
+  filter:blur(4px);
+  z-index:0;
+}
+
+/* Spine */
+.spine{
+  position:absolute; left:50%; top:2%; bottom:2%;
+  width:22px; margin-left:-11px;
+  background:linear-gradient(90deg, #150109, #4a0f26 45%, #150109);
+  border-radius:3px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.6), 0 0 18px rgba(0,0,0,.5);
+  z-index:3;
+}
+
+/* ============================================================
+   5. COVER
+   ============================================================ */
+.cover{
+  position:absolute; left:22%; top:0;
+  width:56%; height:100%;
+  z-index:20;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  transition:transform 1.25s var(--ease-book);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+  padding:clamp(24px,4vw,44px);
+  border-radius:6px 22px 22px 6px;
+  background:
+    linear-gradient(155deg, rgba(255,255,255,.05), transparent 40%),
+    linear-gradient(145deg, #240a17, #4c0f28 55%, #2c0a1a);
+  border:1px solid rgba(216,178,106,.55);
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.6),
+    inset 0 0 60px rgba(232,136,168,.05),
+    inset 0 0 0 1px rgba(216,178,106,.12);
+  overflow:hidden;
+}
+.cover:before{
+  content:"";
+  position:absolute; inset:10px;
+  border:1px solid rgba(216,178,106,.28);
+  border-radius:4px 17px 17px 4px;
+  pointer-events:none;
+}
+.cover-glow{
+  position:absolute; width:340px; height:340px; border-radius:50%;
+  background:rgba(232,136,168,.14); filter:blur(60px);
+  top:-120px; right:-100px; pointer-events:none;
+}
+.cover-eyebrow{
+  font-family:var(--sans); font-size:.68rem; letter-spacing:.28em;
+  color:var(--gold-bright); text-transform:none;
+  margin-bottom:18px; opacity:.85;
+}
+.cover h1{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:clamp(1.9rem, 4.4vw, 3.1rem);
+  color:var(--gold-bright);
+  text-shadow:0 2px 22px rgba(0,0,0,.6);
+  margin-bottom:20px;
+  line-height:1.15;
+}
+.cover-portrait{
+  width:132px; height:132px; border-radius:50%;
+  background:var(--cover-image) center/cover;
+  border:2px solid var(--gold);
+  box-shadow:0 0 0 7px rgba(216,178,106,.08), 0 0 50px rgba(216,178,106,.3);
+  margin-bottom:22px;
+}
+.cover p{
+  font-family:var(--serif-body);
+  font-style:italic;
+  font-size:clamp(1.05rem,1.9vw,1.25rem);
+  color:rgba(247,239,228,.78);
+  max-width:320px;
+  line-height:1.6;
+  margin-bottom:28px;
+}
+.btn{
+  border:0; cursor:pointer; color:#fff8f4;
+  border-radius:999px;
+  padding:13px 26px;
+  font:600 .82rem/1 var(--sans);
+  letter-spacing:.02em;
+  background:linear-gradient(135deg, #b83a63, #7c1c3d);
+  box-shadow:0 12px 28px rgba(123,25,58,.4), inset 0 1px 0 rgba(255,255,255,.15);
+  transition:transform .25s var(--ease-soft), box-shadow .25s var(--ease-soft);
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn:hover{ transform:translateY(-2px) scale(1.02); box-shadow:0 16px 36px rgba(123,25,58,.55); }
+.btn:active{ transform:translateY(0) scale(.97); }
+.btn.ghost{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(216,178,106,.5);
+  box-shadow:none;
+}
+.btn.ghost:hover{ background:rgba(255,255,255,.1); }
+.btn.gold{
+  background:linear-gradient(135deg, #e2bd7c, #b98c48);
+  color:#2b1707;
+}
+.btn.decline{
+  background:transparent;
+  color:rgba(247,239,228,.55);
+  border:1px solid rgba(247,239,228,.22);
+  box-shadow:none;
+  padding:13px 22px;
+}
+.btn.decline:hover{ color:rgba(247,239,228,.85); border-color:rgba(247,239,228,.4); }
+
+/* ============================================================
+   6. PAGES
+   ============================================================ */
+.pages-wrapper{
+  display:none;
+  position:absolute; inset:0;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(120deg, var(--cream), var(--ivory));
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:0 40px 110px rgba(0,0,0,.6);
+  color:var(--ink);
+  transform-style:preserve-3d;
+}
+.pages-wrapper:before{
+  content:""; position:absolute; z-index:4;
+  left:50%; top:0; bottom:0; width:3px; margin-left:-1.5px;
+  background:linear-gradient(transparent, rgba(90,35,50,.22), transparent);
+  box-shadow:0 0 20px rgba(0,0,0,.15);
+}
+.page-pair{
+  position:absolute; inset:0; display:flex;
+  animation:pageTurn 1.85s cubic-bezier(.16,.78,.18,1) both;
+  transform-origin:100% 100%;
+  backface-visibility:hidden;
+  will-change:transform,opacity,clip-path;
+}
+/* A slow, physical-feeling page movement: it begins at the lower-right
+   corner, lifts upward, then settles into the spread. */
+@keyframes pageTurn{
+  0%{
+    opacity:0;
+    transform:perspective(1800px) rotateX(-42deg) rotateZ(-2deg) translate3d(22px,46px,80px) scale(.985);
+    clip-path:polygon(100% 100%,100% 100%,0 100%,0 94%);
+  }
+  18%{
+    opacity:.45;
+    transform:perspective(1800px) rotateX(-28deg) rotateZ(-1.2deg) translate3d(14px,26px,60px) scale(.99);
+    clip-path:polygon(100% 100%,100% 18%,0 58%,0 100%);
+  }
+  48%{
+    opacity:.82;
+    transform:perspective(1800px) rotateX(-10deg) rotateZ(-.35deg) translate3d(7px,10px,28px) scale(.997);
+    clip-path:polygon(100% 100%,100% 0,0 14%,0 100%);
+  }
+  78%{
+    opacity:1;
+    transform:perspective(1800px) rotateX(-2deg) rotateZ(0) translate3d(2px,2px,8px) scale(1);
+    clip-path:polygon(100% 100%,100% 0,0 0,0 100%);
+  }
+  100%{
+    opacity:1;
+    transform:none;
+    clip-path:polygon(100% 100%,100% 0,0 0,0 100%);
+  }
+}
+.page{
+  width:50%; height:100%;
+  padding:clamp(26px,4.2vw,50px);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:space-between;
+  text-align:center;
+  position:relative;
+  background:linear-gradient(110deg, #fff, #fdf7f0);
+}
+.page.right{ background:linear-gradient(250deg, #fff, #fdf7f0); }
+.page-pair::after{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:6;
+  background:linear-gradient(105deg, transparent 42%, rgba(74,28,43,.08) 49%, transparent 57%);
+  opacity:.35; mix-blend-mode:multiply;
+}
+.page:after{
+  content:""; position:absolute; inset:16px;
+  border:1px solid rgba(168,74,90,.12);
+  pointer-events:none;
+}
+.page-top{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.chapter-label{
+  font-family:var(--sans); font-size:.66rem; letter-spacing:.24em;
+  color:var(--gold); opacity:.9;
+}
+.page h3{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:clamp(1.15rem,2.2vw,1.5rem);
+  color:#8c2148;
+  padding-bottom:10px;
+  border-bottom:1px solid #edc3d1;
+  z-index:1;
+}
+.page p{
+  font-family:var(--serif-body);
+  max-width:360px;
+  font-size:clamp(1.05rem,1.9vw,1.22rem);
+  line-height:1.75;
+  color:#4b3a42;
+  z-index:1;
+}
+.page-number{
+  font:600 .68rem/1 var(--sans);
+  color:#b08fa0; letter-spacing:.15em; z-index:1;
+}
+.ornament{ color:var(--gold); opacity:.7; font-size:.9rem; letter-spacing:.3em; }
+
+.controls{ display:flex; gap:10px; z-index:2; flex-wrap:wrap; justify-content:center; }
+.nav-btn{
+  padding:11px 18px; font-size:.78rem;
+  background:linear-gradient(135deg, #b83a63, #7c1c3d);
+}
+
+.like-area{ display:flex; align-items:center; gap:10px; z-index:2; }
+.like-btn{
+  border:0; background:transparent; font-size:1.7rem; cursor:pointer;
+  transition:transform .2s var(--ease-soft);
+  filter:drop-shadow(0 4px 8px rgba(150,30,70,.25));
+}
+.like-btn:hover{ transform:scale(1.12); }
+.like-counter{ font:700 .74rem/1 var(--sans); color:#c73a72; }
+
+.question-box{ display:flex; gap:16px; align-items:center; justify-content:center; z-index:3; min-height:64px; flex-wrap:wrap; }
+.broken-heart{
+  font-size:3rem; display:none; z-index:3;
+  animation:breakPulse .7s ease-in-out infinite alternate;
+}
+@keyframes breakPulse{ to{ transform:scale(1.2) rotate(-5deg); } }
+.final-note{ font-size:.85rem !important; color:#a2788d !important; margin-top:6px; }
+
+/* ============================================================
+   7. FINAL HEART SCENE
+   ============================================================ */
+#finalScene{
+  position:fixed; inset:0; z-index:100; display:none;
+  overflow:hidden; place-items:center;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(232,136,168,.16), transparent 10%),
+    linear-gradient(150deg, #0a0509 0%, #1c0812 60%, #260a17 100%);
+}
+#finalScene:before{
+  content:""; position:absolute; inset:0;
+  background-image:var(--bg-image); background-position:center; background-size:cover;
+  opacity:.06; filter:blur(2px);
+}
+.final-title{
+  position:absolute; top:11%; text-align:center; z-index:3; width:min(92vw,900px);
+  color:#fff; opacity:0; animation:titleIn 1.4s .5s forwards;
+}
+.final-title small{
+  display:block; color:var(--rose-soft); letter-spacing:.3em;
+  text-transform:none; font-size:.66rem; margin-bottom:10px; font-family:var(--sans);
+}
+.final-title strong{
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(1.7rem,5vw,3.4rem); line-height:1.12; color:var(--gold-bright);
+}
+@keyframes titleIn{
+  from{ opacity:0; transform:translateY(14px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.love_word{
+  position:absolute; left:50%; top:52%; white-space:nowrap; z-index:2;
+  color:var(--rose-soft);
+  font:600 clamp(8px,1vw,13px)/1 var(--sans);
+  letter-spacing:1.5px;
+  text-shadow:0 0 8px rgba(255,150,190,.85), 0 0 22px rgba(232,136,168,.35);
+  opacity:0; transform-origin:center;
+  animation:heartWord 4.6s ease-in-out infinite;
+}
+@keyframes heartWord{
+  0%{ opacity:0; transform:translate(var(--x),var(--y)) scale(.25) rotate(var(--rot)); }
+  12%{ opacity:1; }
+  78%{ opacity:.95; }
+  100%{ opacity:0; transform:translate(calc(var(--x) + var(--dx)), calc(var(--y) - 30px)) scale(1.05) rotate(calc(var(--rot) + 12deg)); }
+}
+.center-heart{
+  position:absolute; z-index:3; font-size:clamp(2.6rem,7vw,5rem);
+  filter:drop-shadow(0 0 25px rgba(232,136,168,.7));
+  animation:heartbeat 1.2s ease-in-out infinite;
+}
+@keyframes heartbeat{ 50%{ transform:scale(1.1); } }
+.final-line{
+  position:absolute; bottom:12%; z-index:3; text-align:center; width:min(88vw,760px);
+  font-family:var(--serif-body); font-style:italic;
+  font-size:clamp(.95rem,1.6vw,1.2rem);
+  color:rgba(247,239,228,.75); opacity:0;
+  animation:titleIn 1.4s 1.4s forwards;
+}
+.review-btn{
+  position:absolute; bottom:3.5%; z-index:5;
+  border:1px solid rgba(216,178,106,.4);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(10px);
+  color:#fff; padding:12px 22px; border-radius:999px;
+  cursor:pointer; font:600 .78rem/1 var(--sans);
+  opacity:0; animation:titleIn 1.2s 2.1s forwards;
+  display:flex; align-items:center; gap:8px;
+  transition:transform .25s var(--ease-soft), background .25s var(--ease-soft);
+}
+.review-btn:hover{ transform:translateY(-2px); background:rgba(255,255,255,.11); }
+
+/* ============================================================
+   8. RESPONSIVE
+   ============================================================ */
+@media (max-width:700px){
+  .book-stage{ width:94vw; height:80vh; min-height:520px; }
+  .cover{ left:6%; width:88%; }
+  .pages-wrapper{ border-radius:12px; }
+  .page{ padding:22px 16px; }
+  .page p{ font-size:.98rem; line-height:1.65; }
+  .pages-wrapper:before{ display:none; }
+  .page:after{ inset:8px; }
+  .spine{ display:none; }
+  .controls{ gap:8px; }
+  .nav-btn{ padding:10px 14px; font-size:.72rem; }
+}
+@media (max-height:680px) and (min-width:701px){
+  .book-stage{ height:90vh; min-height:400px; }
+}
+@media (prefers-reduced-motion: reduce){
+  *,*:before,*:after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+.sr-only{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip:rect(0,0,0,0); white-space:nowrap;
+}
+</style>
+</head>
+<body>
+
+<div class="scene" role="presentation">
+  <div class="grain"></div>
+  <div class="ambient" id="ambient"></div>
+  <div class="vignette"></div>
+
+  <main class="book-stage" aria-label="Unda and Kessy's love book">
+    <div class="book">
+      <div class="book-shadow"></div>
+      <div class="spine"></div>
+
+      <!-- COVER -->
+      <section class="cover" id="bookCover">
+        <div class="cover-glow" aria-hidden="true"></div>
+        <p class="cover-eyebrow">a little story, written for you</p>
+        <h1>U... 💞 K....</h1>
+        <div class="cover-portrait" role="img" aria-label="A photo of Kessy"></div>
+        <p>A little story written from my heart.</p>
+        <button class="btn" id="openBtn" onclick="openBook()">Open Our Story <span aria-hidden="true">♡</span></button>
+      </section>
+
+      <!-- PAGES -->
+      <section class="pages-wrapper" id="pagesWrapper" aria-live="polite">
+
+        <div class="page-pair" id="pagePair1">
+          <article class="page left">
+            <div class="page-top">
+              <span class="chapter-label">Chapter I</span>
+              <span class="ornament">✦</span>
+              <h3>Where It Begins</h3>
+            </div>
+            <p>Every day I see you, I find a little more joy waiting inside my life. You've become something rare — a quiet kind of happiness I didn't know I needed.</p>
+            <div>
+              <div class="like-area">
+                <button class="like-btn" onclick="addLike(this)" aria-label="Send a heart">♡</button>
+                <span class="like-counter">0</span>
+              </div>
+              <span class="page-number">Page 01</span>
+            </div>
+          </article>
+          <article class="page right">
+            <div class="page-top">
+              <span class="chapter-label">Chapter II</span>
+              <span class="ornament">✦</span>
+              <h3>A Feeling I Can't Explain</h3>
+            </div>
+            <p>The thought of being close to you feels like the kindest message my heart has ever carried. Did you know you fill a space in me I never had words for?</p>
+            <div class="controls">
+              <button class="btn nav-btn" onclick="showPair(2)">Continue <span aria-hidden="true">→</span></button>
+            </div>
+            <span class="page-number">Page 02</span>
+          </article>
+        </div>
+
+        <div class="page-pair" id="pagePair2" style="display:none">
+          <article class="page left">
+            <div class="page-top">
+              <span class="chapter-label">Chapter III</span>
+              <span class="ornament">✦</span>
+              <h3>Every Little Thing About You</h3>
+            </div>
+            <p>Moonlight and starlight are nothing next to your smile. With every step I take, my heart keeps quietly hoping for you.</p>
+            <div>
+              <div class="like-area">
+                <button class="like-btn" onclick="addLike(this)" aria-label="Send a heart">♡</button>
+                <span class="like-counter">0</span>
+              </div>
+              <span class="page-number">Page 03</span>
+            </div>
+          </article>
+          <article class="page right">
+            <div class="page-top">
+              <span class="chapter-label">Chapter IV</span>
+              <span class="ornament">✦</span>
+              <h3>A Story Still Being Written</h3>
+            </div>
+            <p>Our story is a book still being written, and every new page brings its own quiet kind of joy. I hope you'll keep turning pages with me.</p>
+            <div class="controls">
+              <button class="btn ghost nav-btn" onclick="showPair(1)"><span aria-hidden="true">←</span> Previous</button>
+              <button class="btn nav-btn" onclick="showPair(3)">Final Chapter <span aria-hidden="true">→</span></button>
+            </div>
+            <span class="page-number">Page 04</span>
+          </article>
+        </div>
+
+        <div class="page-pair" id="pagePair3" style="display:none">
+          <article class="page left">
+            <div class="page-top">
+              <span class="chapter-label">Chapter V</span>
+              <span class="ornament">✦</span>
+              <h3>A Little Message From My Heart</h3>
+            </div>
+            <p>I wanted you to know exactly how much you mean to me, and how much your presence is worth in my life, all of it, always.</p>
+            <div>
+              <div class="like-area">
+                <button class="like-btn" onclick="addLike(this)" aria-label="Send a heart">♡</button>
+                <span class="like-counter">0</span>
+              </div>
+              <span class="page-number">Page 05</span>
+            </div>
+          </article>
+          <article class="page right">
+            <div class="page-top">
+              <span class="chapter-label">One Last Question 💖</span>
+              <h3>Will You Continue This Story With Me?</h3>
+            </div>
+            <p id="finalMsg">If your heart feels the same, press yes and let this little story continue.</p>
+            <div class="broken-heart" id="sadAnimation" aria-hidden="true">💔</div>
+            <div class="question-box" id="btnGroup">
+              <button class="btn gold" id="yesBtn" onclick="acceptLove()">Yes 🥰</button>
+              <button class="btn decline" id="noBtn" onclick="rejectLove()">No 😢</button>
+            </div>
+            <span class="page-number">Page 06 · the choice is yours</span>
+          </article>
+        </div>
+
+      </section>
+    </div>
+  </main>
+</div>
+
+<!-- FINAL HEART SCENE -->
+<div id="finalScene" aria-live="polite"></div>
+
+<script>
+(function(){
+
+/* ---------- ambient particles (built once) ---------- */
+const ambient = document.getElementById('ambient');
+const symbols = ['♡','♥','✦'];
+for(let i=0;i<26;i++){
+  const el = document.createElement('span');
+  const isHeart = i % 3 !== 0;
+  el.className = isHeart ? 'bg-heart' : 'mote';
+  if(isHeart) el.textContent = symbols[i % symbols.length];
+  else { el.style.width = el.style.height = (3 + Math.random()*3) + 'px'; }
+  el.style.left = Math.random()*100 + 'vw';
+  if(isHeart) el.style.setProperty('--s', (10 + Math.random()*20) + 'px');
+  el.style.setProperty('--d', (9 + Math.random()*10) + 's');
+  el.style.setProperty('--delay', (-Math.random()*16) + 's');
+  el.style.setProperty('--drift', (-70 + Math.random()*140) + 'px');
+  ambient.appendChild(el);
+}
+
+let likesCount = 0;
+let noClickCount = 0;
+
+window.openBook = function(){
+  const cover = document.getElementById('bookCover');
+  cover.style.transform = 'rotateY(-162deg)';
+  setTimeout(() => {
+    cover.style.display = 'none';
+    document.getElementById('pagesWrapper').style.display = 'block';
+  }, 680);
+};
+
+window.showPair = function(n){
+  document.querySelectorAll('.page-pair').forEach(p => p.style.display = 'none');
+  const target = document.getElementById('pagePair' + n);
+  target.style.display = 'flex';
+  target.style.animation = 'none';
+  void target.offsetWidth;
+  target.style.animation = 'pageTurn 1.85s cubic-bezier(.16,.78,.18,1) both';
+};
+
+window.addLike = function(btn){
+  likesCount++;
+  document.querySelectorAll('.like-counter').forEach(c => c.textContent = likesCount);
+  if(btn.animate){
+    btn.animate(
+      [{ transform:'scale(1)' }, { transform:'scale(1.4)' }, { transform:'scale(1)' }],
+      { duration: 350, easing: 'ease-out' }
+    );
+  }
+};
+
+window.rejectLove = function(){
+  noClickCount++;
+  const yes = document.getElementById('yesBtn');
+  const msg = document.getElementById('finalMsg');
+  const sad = document.getElementById('sadAnimation');
+  const group = document.getElementById('btnGroup');
+
+  if(noClickCount === 1){
+    yes.style.transform = 'scale(1.3)';
+    msg.textContent = "Just a little more... yes is still waiting for you. 💗";
+  } else if(noClickCount === 2){
+    yes.style.transform = 'scale(1.65)';
+    msg.textContent = "My heart is still hoping for a good answer. 🥺";
+  } else {
+    group.style.display = 'none';
+    sad.style.display = 'block';
+    msg.textContent = "My heart is about to break. Please, press yes.";
+    setTimeout(() => {
+      sad.style.display = 'none';
+      group.style.display = 'flex';
+      document.getElementById('noBtn').style.display = 'none';
+      yes.style.transform = 'scale(2)';
+    }, 2100);
+  }
+};
+
+/* ---------- final heart scene ---------- */
+function clampScale(){
+  return Math.min(window.innerWidth, window.innerHeight) / 34;
+}
+
+window.acceptLove = function(){
+  document.querySelector('.book-stage').style.transition = 'opacity .6s ease, transform .6s ease';
+  document.querySelector('.book-stage').style.opacity = '0';
+  document.querySelector('.book-stage').style.transform = 'scale(.94)';
+
+  setTimeout(buildFinalScene, 350);
+};
+
+function buildFinalScene(){
+  const scene = document.getElementById('finalScene');
+  scene.innerHTML = '';
+  scene.style.display = 'grid';
+
+  const title = document.createElement('div');
+  title.className = 'final-title';
+  title.innerHTML = '<small>One answer · one story</small><strong>U... 💞 K....</strong>';
+  scene.appendChild(title);
+
+  const center = document.createElement('div');
+  center.className = 'center-heart';
+  center.textContent = '💗';
+  scene.appendChild(center);
+
+  /* MATHEMATICAL HEART — preserved exactly:
+     x = 16 sin^3(theta)
+     y = -(13 cos(theta) - 5 cos(2 theta) - 2 cos(3 theta) - cos(4 theta)) */
+  const total = 120;
+  const scale = clampScale();
+  for(let i=0;i<total;i++){
+    const angle = (i/total) * Math.PI * 2;
+    const x = 16 * Math.pow(Math.sin(angle), 3);
+    const y = -(13*Math.cos(angle) - 5*Math.cos(2*angle) - 2*Math.cos(3*angle) - Math.cos(4*angle));
+
+    const span = document.createElement('span');
+    span.className = 'love_word';
+    span.textContent = 'U...💞K....';
+    span.style.setProperty('--x', (x*scale) + 'px');
+    span.style.setProperty('--y', (y*scale) + 'px');
+    span.style.setProperty('--dx', (-20 + Math.random()*40) + 'px');
+    span.style.setProperty('--rot', (-12 + Math.random()*24) + 'deg');
+    span.style.animationDelay = ((i/total) * -4.6) + 's';
+    scene.appendChild(span);
+  }
+
+  const line = document.createElement('p');
+  line.className = 'final-line';
+  line.textContent = 'Two hearts. One beautiful beginning.';
+  scene.appendChild(line);
+
+  const review = document.createElement('button');
+  review.className = 'review-btn';
+  review.innerHTML = 'Read It Again <span aria-hidden="true">↺</span>';
+  review.onclick = resetStory;
+  scene.appendChild(review);
+}
+
+function resetStory(){
+  const scene = document.getElementById('finalScene');
+  scene.style.display = 'none';
+  scene.innerHTML = '';
+
+  /* reset state */
+  likesCount = 0;
+  noClickCount = 0;
+  document.querySelectorAll('.like-counter').forEach(c => c.textContent = '0');
+  document.getElementById('finalMsg').textContent = 'If your heart feels the same, press yes and let this little story continue.';
+  document.getElementById('yesBtn').style.transform = '';
+  document.getElementById('noBtn').style.display = '';
+  document.getElementById('btnGroup').style.display = 'flex';
+  document.getElementById('sadAnimation').style.display = 'none';
+
+  document.querySelectorAll('.page-pair').forEach(p => p.style.display = 'none');
+  document.getElementById('pagePair1').style.display = 'flex';
+
+  document.getElementById('pagesWrapper').style.display = 'none';
+
+  const cover = document.getElementById('bookCover');
+  cover.style.display = 'flex';
+  cover.style.transform = 'rotateY(-162deg)';
+  void cover.offsetWidth;
+  cover.style.transition = 'none';
+  cover.style.transform = 'rotateY(0deg)';
+  void cover.offsetWidth;
+  cover.style.transition = 'transform 1.25s cubic-bezier(.22,.61,.14,1)';
+
+  const stage = document.querySelector('.book-stage');
+  stage.style.transition = 'opacity .6s ease, transform .6s ease';
+  stage.style.opacity = '1';
+  stage.style.transform = 'scale(1)';
+}
+
+})();
+</script>
+</body>
+</html>
