@@ -102,7 +102,7 @@ button:focus-visible, a:focus-visible{
   opacity:0;
 }
 .bg-heart{
-  position:absolute; bottom:-8vh; color:rgba(232,136,168,.28);
+  position:absolute; bottom:-8vh; color:rgba(232,136,168,.50);
   font-size:var(--s); animation:rise var(--d) linear var(--delay) infinite;
 }
 @keyframes drift{
@@ -247,9 +247,9 @@ button:focus-visible, a:focus-visible{
 .btn:hover{ transform:translateY(-2px) scale(1.02); box-shadow:0 16px 36px rgba(123,25,58,.55); }
 .btn:active{ transform:translateY(0) scale(.97); }
 .btn.ghost{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(216,178,106,.5);
-  box-shadow:none;
+  
+  border:1px solid rgba(63, 172, 223, 0.5);
+  box-shadow:0 16px 36px;
 }
 .btn.ghost:hover{ background:rgba(255,255,255,.1); }
 .btn.gold{
@@ -257,7 +257,7 @@ button:focus-visible, a:focus-visible{
   color:#2b1707;
 }
 .btn.decline{
-  background:transparent;
+  
   color:rgba(247,239,228,.55);
   border:1px solid rgba(247,239,228,.22);
   box-shadow:none;
@@ -627,15 +627,15 @@ button:focus-visible, a:focus-visible{
 /* ---------- ambient particles (built once) ---------- */
 const ambient = document.getElementById('ambient');
 const symbols = ['♡','♥','✦'];
-for(let i=0;i<26;i++){
+for(let i=0;i<50;i++){
   const el = document.createElement('span');
   const isHeart = i % 3 !== 0;
   el.className = isHeart ? 'bg-heart' : 'mote';
   if(isHeart) el.textContent = symbols[i % symbols.length];
-  else { el.style.width = el.style.height = (3 + Math.random()*3) + 'px'; }
+  else { el.style.width = el.style.height = (8 + Math.random()*8) + 'px'; }
   el.style.left = Math.random()*100 + 'vw';
-  if(isHeart) el.style.setProperty('--s', (10 + Math.random()*20) + 'px');
-  el.style.setProperty('--d', (9 + Math.random()*10) + 's');
+  if(isHeart) el.style.setProperty('--s', (30 + Math.random()*50) + 'px');
+  el.style.setProperty('--d', (18 + Math.random()*20) + 's');
   el.style.setProperty('--delay', (-Math.random()*16) + 's');
   el.style.setProperty('--drift', (-70 + Math.random()*140) + 'px');
   ambient.appendChild(el);
