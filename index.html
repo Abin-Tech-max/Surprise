@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -405,7 +406,7 @@ button:focus-visible, a:focus-visible{
 #finalScene:before{
   content:""; position:absolute; inset:0;
   background-image:var(--bg-image); background-position:center; background-size:cover;
-  opacity:.06; filter:blur(2px);
+  opacity:.9; filter:blur(2px);
 }
 .final-title{
   position:absolute; top:11%; text-align:center; z-index:3; width:min(92vw,900px);
@@ -719,7 +720,7 @@ function buildFinalScene(){
 
   const title = document.createElement('div');
   title.className = 'final-title';
-  title.innerHTML = '<small>One answer · one story</small><strong>U... 💞 K....</strong>';
+  title.innerHTML = '<small>One answer · one story</small><strong>Unda 💞 Kessy</strong>';
   scene.appendChild(title);
 
   const center = document.createElement('div');
@@ -739,7 +740,7 @@ function buildFinalScene(){
 
     const span = document.createElement('span');
     span.className = 'love_word';
-    span.textContent = 'U...💞K....';
+    span.textContent = 'Unda💞Kessy';
     span.style.setProperty('--x', (x*scale) + 'px');
     span.style.setProperty('--y', (y*scale) + 'px');
     span.style.setProperty('--dx', (-20 + Math.random()*40) + 'px');
